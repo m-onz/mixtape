@@ -1,6 +1,6 @@
 # mixtape
 
-live coding object for pure data (Pd) for algorithmic music and visuals.
+A live coding object for pure data (Pd) useful for algorithmic music and visuals.
 
 ## Overview
 
@@ -18,7 +18,7 @@ The concept is incredibly simple, tapes are simply messages that contain hyphens
 
 This becomes a list/message that can be fed into else/sequencer or mseq (basically a sequencing object that iterates through the message).
 
-mixtape allows you to create more complex patterns and outputs a list of either rests or numbers.
+mixtape allows you to create more complex patterns and outputs a list of either rests or numbers. eg.
 
 ```
 - 1 2 4*3 [ 1 2 ]*3 scramble [ 1 2 - 3 4 ]  
