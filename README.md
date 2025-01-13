@@ -2,6 +2,10 @@
 
 A live coding object for pure data (Pd) useful for algorithmic music and visuals.
 
+## Screenshot
+
+<img src="screenshot.png" loading="lazy" style="width:100%" />
+
 ## Overview
 
 This is a live coding object for Pure data (Pd) and GEM.
