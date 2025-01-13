@@ -12,7 +12,7 @@ This is a live coding object for Pure data (Pd) and GEM.
 
 ## what is a mixtape?
 
-mixtape is an approach to algoritmic music or visual composition based on the concept of messages (or tapes) that can be fed into sequencing objects.
+mixtape is an approach to algorithmic music or visual composition based on the concept of messages (or tapes) that can be fed into sequencing objects.
 
 The concept is incredibly simple, tapes are simply messages that contain hyphens (rests) and numbers. 
 
