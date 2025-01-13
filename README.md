@@ -46,4 +46,4 @@ You will need to feed it into a sequencer object. See the "mseq-example.pd" file
 
 ## difference between mseq and mseq2
 
-mseq will run the tape with each mseq instance running it when banged but each instance can run the pattern out of sync, banging a tape will cause it to restart from scratch. mseq2 will syncronise the tape across many instances so if you run the tape across many mseq2 it doesn't matter when you bang the message they stay in sync. So if you have a pattern `1 2 3 1 with mseq2 you can bang each tape but each object will output in sync. Depending on whether you want polyrhythms or interesting counterpoint you may opt for different objects.
+mseq will run the tape with each mseq instance running it when banged but each instance can run the pattern out of sync, banging a tape will cause it to restart from scratch. mseq2 will syncronise the tape across many instances so if you run the tape across many mseq2 it doesn't matter when you bang the message they stay in sync. So if you have a pattern `1 2 3 1` with mseq2 you can bang each tape but each object will output in sync.
