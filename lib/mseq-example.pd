@@ -1,4 +1,5 @@
-#N canvas 693 121 967 787 12;
+#N canvas 697 145 967 787 12;
+#X declare -path pdjs;
 #X obj 102 592 mseq, f 14;
 #X obj 68 488 bng 20 250 50 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000;
 #X obj 71 402 tgl 20 0 empty empty empty 0 -10 0 12 #fcfcfc #000000 #000000 0 1;
@@ -26,6 +27,7 @@
 #X msg 199 111 list 99;
 #X msg 179 83 list - [2 3 4 5]*4;
 #X msg 160 58 list - 4;
+#X obj 12 11 declare -path pdjs;
 #X connect 0 0 4 0;
 #X connect 0 0 7 0;
 #X connect 1 0 8 0;
