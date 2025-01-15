@@ -1,14 +1,12 @@
 # mixtape
 
-A live coding object for pure data (Pd) useful for algorithmic music and visuals.
-
 ## Screenshot
 
 <img src="screenshot.png" loading="lazy" style="width:100%" />
 
 ## Overview
 
-This is a live coding toolkit for algorithmic music and visual compositoion for Pure data (Pd) and GEM.
+A live coding toolkit for algorithmic music and visual composition in Pure data (Pd) and GEM. 
 
 ## install
 
