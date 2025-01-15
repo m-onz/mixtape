@@ -8,7 +8,17 @@ A live coding object for pure data (Pd) useful for algorithmic music and visuals
 
 ## Overview
 
-This is a live coding object for Pure data (Pd) and GEM.
+This is a live coding toolkit for algorithmic music and visual compositoion for Pure data (Pd) and GEM.
+
+## install
+
+Add the "mixtape/lib" folder to the Pd path:
+
+file -> preferences -> edit preferences -> new (add a new path).
+
+## status
+
+More objects and examples being adding, the parser is currently a bit buggy but it will eventually allow for complex patterns.
 
 ## what is a mixtape?
 
