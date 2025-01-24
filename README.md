@@ -5,7 +5,7 @@
 
 mixtape is an audio visual live coding environment build using Pure data and (GEM).
 
-# inspiration_
+# inspiration
 
 Live coding environment - Andrew Browser
 pseudo techno PL
