@@ -5,6 +5,12 @@
 
 mixtape is an audio visual live coding environment build using Pure data and (GEM).
 
+# inspiration
+
+Live coding environment - Andrew Browser
+pseudo techno PL
+else
+
 # Overview
 
 Typically live coding or live patching deals with either audio OR visuals but rarely together. Other environments combine seperate tech to achieve this for example combining tidalcycles with hydra.
@@ -24,6 +30,8 @@ The number outputted can be any control number or parameter for example MIDI not
 Using the "pdjs" external available via dekken (Pds extension manager) available through the menu. It's possible to create objects that have javascript code. I created a very basic parser that takes patterns like "-*3 [ 2 3 - 3]*3" and converts it into a tape or mesage of hyphens or numbers.
 
 This means that you can create complex patterns in a more terse syntax that become more longer tapes ready for consumption by sequencing objects.
+
+Documentation for this pattern language to follow. + a full re-write of the parser.
 
 
 
