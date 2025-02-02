@@ -96,12 +96,18 @@ const rl = createInterface({
 
 rl.prompt();
 
-var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat', 'cymbal', 'cymbals2', 'fx', 'perc', 'perc2', 'misc', 'modular', 'wine-glass' ]
+//var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat', 'cymbal', 'cymbals2', 'fx', 'perc', 'perc2', 'misc', 'modular', 'wine-glass', 'pad', 'riff', 'aibass', 'ai4', 'vocals' ]
+var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat' ]
 var perc_instruments = [ 'perc', 'perc2', 'wine-glass']
 var hihat_instruments = [ 'hihat', 'hihat2', 'hihat3', 'openhihat' ]
 var cymbal_instruments = [ 'cymbal', 'cymbals2' ]
 var misc_instruments = [ 'misc', 'modular', 'fx' ]
 var ai_instruments = [ 'a4', 'aibass' ]
+
+
+//`
+//offset 0, pad 1 -*15, riff 1 -*15, aibass 4 -*62, vocal 6 -*124\n
+//`
 
 rl.on('line', (line) => {
   const cmd = line.trim();
@@ -111,17 +117,68 @@ rl.on('line', (line) => {
 
   //ls.stdin.write(`${cmd}\n`);
 
-  if (cmd.startsWith('all_sp')) {
+  if (cmd.startsWith('s1')) {
+
+  ls.stdin.write(`
+  pad -, riff -, aibass -, vocal -,
+  chords 79 -*5 78 -*7 78 -*5 78 -*3, bass ${generator.generatePattern()}, random_synth;\n
+
+\n`)
+
+  } else if (cmd.startsWith('s2')) {
+   
+
+  ls.stdin.write(`
+  pad -, riff -, aibass -, vocal -,
+  chords 50*11 51*30 52*15 54*15 55*30, bass ${generator.generatePattern()}, random_synth;\n
+`)
+
+  } else if (cmd.startsWith('s3')) {
+   
+
+  ls.stdin.write(`
+  chords -, bass -, riff 0 -*15, aibass 0 -*15;\n
+`)
+
+  } else if (cmd.startsWith('s4')) {
+
+ls.stdin.write(`
+chords -, bass -,
+offset 0, pad 1 -*15, riff 1 -*15, aibass 4 -*15, vocal 6 -*124\n
+`
+)
+
+
+  } else if (cmd.startsWith('more_perc')) {
+
+     ls.stdin.write(`hihat ${generator.generatePattern("complex")}\n`)
+   ls.stdin.write(`hihat2 ${generator.generatePattern("complex")}\n`)
+   ls.stdin.write(`hihat3 ${generator.generatePattern("complex")}\n`)
+/*
+  ls.stdin.write(`m1 hihat ${generator.generatePattern()}\n`)
+   ls.stdin.write(`m1 hihat2 ${generator.generatePattern()}\n`)
+   ls.stdin.write(`m1 hihat3 ${generator.generatePattern()}\n`)
+
+  ls.stdin.write(`m2 hihat ${generator.generatePattern()}\n`)
+   ls.stdin.write(`m2 hihat2 ${generator.generatePattern()}\n`)
+   ls.stdin.write(`m2 hihat3 ${generator.generatePattern()}\n`)
+*/
+  ls.stdin.write(`perc ${generator.generatePattern()}\n`)
+   ls.stdin.write(`perc2 ${generator.generatePattern()}\n`)
+   ls.stdin.write(`misc ${generator.generatePattern()}\n`)
+
+
+  } else if (cmd.startsWith('all_sp')) {
     instruments.forEach(function (i) {
       ls.stdin.write(`${i} ${generator.generatePattern()}\n`)
-      ls.stdin.write(`m1 ${i} ${generator.generatePattern()}\n`)
-      ls.stdin.write(`m1 ${i} ${generator.generatePattern()}\n`)
+      //ls.stdin.write(`m1 ${i} ${generator.generatePattern()}\n`)
+      //ls.stdin.write(`m1 ${i} ${generator.generatePattern()}\n`)
     })
    } else if (cmd.startsWith('all_cp')) {
     instruments.forEach(function (i) {
       ls.stdin.write(`${i} ${generator.generatePattern("complex")}\n`)
-      ls.stdin.write(`m1 ${i} ${generator.generatePattern("complex")}\n`)
-      ls.stdin.write(`m2 ${i} ${generator.generatePattern("complex")}\n`)
+      //ls.stdin.write(`m1 ${i} ${generator.generatePattern("complex")}\n`)
+      //ls.stdin.write(`m2 ${i} ${generator.generatePattern("complex")}\n`)
     })
    } else if (cmd.startsWith('ai_all')) {
       if (cmd.includes("sp")) {
@@ -157,14 +214,14 @@ rl.on('line', (line) => {
       if (cmd.includes("sp")) {
         hihat_instruments.forEach(function (i) {
         ls.stdin.write(`${i} ${generator.generatePattern()}\n`)
-        ls.stdin.write(`m1 ${i} ${generator.generatePattern()}\n`)
-        ls.stdin.write(`m2 ${i} ${generator.generatePattern()}\n`)
+        //ls.stdin.write(`m1 ${i} ${generator.generatePattern()}\n`)
+        //ls.stdin.write(`m2 ${i} ${generator.generatePattern()}\n`)
       })
     } else if (cmd.includes("cp")) {
       hihat_instruments.forEach(function (i) {
         ls.stdin.write(`${i} ${generator.generatePattern("complex")}\n`)
-        ls.stdin.write(`m1 ${i} ${generator.generatePattern("complex")}\n`)
-        ls.stdin.write(`m2 ${i} ${generator.generatePattern("complex")}\n`)
+        //ls.stdin.write(`m1 ${i} ${generator.generatePattern("complex")}\n`)
+        //ls.stdin.write(`m2 ${i} ${generator.generatePattern("complex")}\n`)
       })
     }
   } else if (cmd.startsWith('perc_all')) {
@@ -180,7 +237,11 @@ rl.on('line', (line) => {
 
   } else if (cmd.startsWith('dnb')) {
     var sound = Math.floor(Math.random()*111)
-    ls.stdin.write(`kick ${sound} -*9 ${sound} -*5, snare -*4 ${sound} -*3, clap -*4 ${sound} -*3;\n`)
+    ls.stdin.write(`metro 88, kick ${sound} -*9 ${sound} -*5, snare -*4 ${sound} -*3, clap -*4 ${sound} -*3;\n`)
+  
+ }  else if (cmd.startsWith('house')) {
+    //var sound = Math.floor(Math.random()*111)
+    ls.stdin.write(`metro 111, kick 4 -*3, openhihat -*2 1 -*1, clap -*4 1 -*3, snare -*2 1 -*13, hihat -*11 [ 9 9 8 4 7 2 4 ], hihat2 -*22 [ 9*5 9 8 4 7 2 4 ], hihat3 0 -*7, perc 0 -*33 1 2 3 4 5 6, perc2 5 -*31 5*11, modular 19 -*15 7 -*15;\n`)
   } else if (cmd.includes('sp')) {
     ls.stdin.write(cmd.replace(/sp/g, `${generator.generatePattern()}\n`))
   } else if (cmd.includes('cp')) {
