@@ -96,8 +96,8 @@ const rl = createInterface({
 
 rl.prompt();
 
-//var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat', 'cymbal', 'cymbals2', 'fx', 'perc', 'perc2', 'misc', 'modular', 'wine-glass', 'pad', 'riff', 'aibass', 'ai4', 'vocals' ]
-var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat' ]
+var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat', 'cymbal', 'cymbals2', 'fx', 'perc', 'perc2', 'misc', 'modular', 'wine-glass' ]
+//var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat' ]
 var perc_instruments = [ 'perc', 'perc2', 'wine-glass']
 var hihat_instruments = [ 'hihat', 'hihat2', 'hihat3', 'openhihat' ]
 var cymbal_instruments = [ 'cymbal', 'cymbals2' ]
@@ -108,6 +108,60 @@ var ai_instruments = [ 'a4', 'aibass' ]
 //`
 //offset 0, pad 1 -*15, riff 1 -*15, aibass 4 -*62, vocal 6 -*124\n
 //`
+
+var set_1 = [
+  'metro 88, bass 0 -*15',
+  'kick 0 -*9 0 -*5, snare -*4 0 -*3, clap -*4 0 -*3;',
+  'hihat 0',
+  'bass 0 -*33',
+  'hihat2 0',
+  'bass 0 -*15',
+  'hihat3 0',
+  'cymbal 0',
+  'cymbal2 0'
+]
+
+var incro = 0
+
+ls.stdin.write(`atmos 0 -*15\n`)
+
+setInterval(function () {
+
+  var random_offset = Math.floor(Math.random()*999)
+  var p = set_1[incro % set_1.length]
+  var gap = Math.floor(Math.random()*69)
+
+  ls.stdin.write(`${p}\n`);
+  ls.stdin.write(`offset ${random_offset}\n`)
+
+  if (Math.random() > 0.5) {
+    var p2 = `${instruments[Math.floor(Math.random()*instruments.length)]} -*${gap} ${generator.generatePattern()}\n`
+    ls.stdin.write(p2)
+    console.log('running ', p2)
+  }
+
+  if (Math.random() > 0.9) {
+    var gap = Math.floor(Math.random()*69)
+    var gap2 = Math.floor(Math.random()*69)
+    var gap3 = Math.floor(Math.random()*69)
+    var gap4 = Math.floor(Math.random()*69)
+    ls.stdin.write(`hihat -*${gap} ${generator.generatePattern("complex")}\n`)
+    ls.stdin.write(`hihat2 -*${gap} ${generator.generatePattern("complex")}\n`)
+    ls.stdin.write(`hihat3 -*${gap} ${generator.generatePattern("complex")}\n`)
+    ls.stdin.write(`perc -*${gap} ${generator.generatePattern()}\n`)
+    ls.stdin.write(`perc2 -*${gap} ${generator.generatePattern()}\n`)
+    ls.stdin.write(`misc -*${gap} ${generator.generatePattern()}\n`)
+    console.log('adding random percussion')
+  }
+
+  console.log('running ', p)
+
+  incro++;
+ 
+}, 11000);
+
+
+
 
 rl.on('line', (line) => {
   const cmd = line.trim();
@@ -157,20 +211,9 @@ offset 0, pad 1 -*15, riff 1 -*15, aibass 4 -*15, vocal 6 -*124\n
 var gap2 = Math.floor(Math.random()*69)
 var gap3 = Math.floor(Math.random()*69)
 var gap4 = Math.floor(Math.random()*69)
-
-
      ls.stdin.write(`hihat -*${gap} ${generator.generatePattern("complex")}\n`)
    ls.stdin.write(`hihat2 -*${gap} ${generator.generatePattern("complex")}\n`)
    ls.stdin.write(`hihat3 -*${gap} ${generator.generatePattern("complex")}\n`)
-/*
-  ls.stdin.write(`m1 hihat ${generator.generatePattern()}\n`)
-   ls.stdin.write(`m1 hihat2 ${generator.generatePattern()}\n`)
-   ls.stdin.write(`m1 hihat3 ${generator.generatePattern()}\n`)
-
-  ls.stdin.write(`m2 hihat ${generator.generatePattern()}\n`)
-   ls.stdin.write(`m2 hihat2 ${generator.generatePattern()}\n`)
-   ls.stdin.write(`m2 hihat3 ${generator.generatePattern()}\n`)
-*/
   ls.stdin.write(`perc -*${gap} ${generator.generatePattern()}\n`)
    ls.stdin.write(`perc2 -*${gap} ${generator.generatePattern()}\n`)
    ls.stdin.write(`misc -*${gap} ${generator.generatePattern()}\n`)

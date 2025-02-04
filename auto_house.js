@@ -96,8 +96,8 @@ const rl = createInterface({
 
 rl.prompt();
 
-//var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat', 'cymbal', 'cymbals2', 'fx', 'perc', 'perc2', 'misc', 'modular', 'wine-glass', 'pad', 'riff', 'aibass', 'ai4', 'vocals' ]
-var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat' ]
+var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat', 'cymbal', 'cymbals2', 'fx', 'perc', 'perc2', 'misc', 'modular', 'wine-glass' ]
+//var instruments = [ 'kick', 'snare', 'snare2', 'clap', 'hihat', 'hihat2', 'hihat3', 'openhihat' ]
 var perc_instruments = [ 'perc', 'perc2', 'wine-glass']
 var hihat_instruments = [ 'hihat', 'hihat2', 'hihat3', 'openhihat' ]
 var cymbal_instruments = [ 'cymbal', 'cymbals2' ]
@@ -108,6 +108,94 @@ var ai_instruments = [ 'a4', 'aibass' ]
 //`
 //offset 0, pad 1 -*15, riff 1 -*15, aibass 4 -*62, vocal 6 -*124\n
 //`
+
+//chords 79 -*5 78 -*7 78 -*5 78 -*3, bass_synth ${generator.generatePattern()}, random_synth
+
+var set_1 = [
+  'chords 0 -*7',
+  'chords 1 -*7',
+  'chords 2 -*7',
+  'chords 3 -*7',
+  'metro 111, chords 79 -*5 78 -*7 78 -*5 78 -*3, random_synth;',
+  'metro 111, kick 4 -*3, openhihat -*2 1 -*1, clap -*4 1 -*3, snare -*2 1 -*13;',
+  'hihat 0',
+  'hihat3 0 -*7, perc 0 -*33 1 2 3 4 5 6, perc2 5 -*31 5*11, modular 19 -*15 7 -*15;',
+  'chords 79 -*5 78 -*7 78 -*5 78 -*3, random_synth',
+  'hihat3 0',
+  'cymbal 0',
+  'cymbal2 0',
+  'chords 4 -*3',
+  'chords 5 -*3',
+  'chords 6 -*3',
+  'chords 7 -*3',
+  'chords 4 -*2 4 -*2 4 -*2 4 -*2 4 -*2 5 -*2 5 -*2 5 -*2 5 -*2 6 -*2 5 -*2 2 -*2 3 -*2 4 -*2',
+  'chords 1 -*2 1 -*2 1 -*2 1 -*2 1 -*2 1 -*2 1 -*2 1 -*2 1 -*2 1 -*2 2 -*2 2 -*2 3 -*2 4 -*2',
+  'chords 50*11 51*30 52*15 54*15 55*30'
+]
+
+var incro = 0
+
+ls.stdin.write(`hihat 0 -*7\n`)
+
+setTimeout(function () {
+  ls.stdin.write(`hihat2 0\n`)
+}, 3000)
+
+setInterval(function () {
+
+  var random_offset = Math.floor(Math.random()*999)
+  var p = set_1[incro % set_1.length]
+  var gap = Math.floor(Math.random()*69)
+
+  ls.stdin.write(`${p}\n`);
+  ls.stdin.write(`offset ${random_offset}\n`)
+
+  if (Math.random() > 0.5) {
+    var p2 = `${instruments[Math.floor(Math.random()*instruments.length)]} -*${gap} ${generator.generatePattern()}\n`
+    ls.stdin.write(p2)
+    console.log('running ', p2)
+  }
+
+  if (Math.random() > 0.5) {
+    var p2 = `synth_bass -*${gap} ${generator.generatePattern()}\n`
+    ls.stdin.write(p2)
+    console.log('running ', p2)
+  }
+
+  if (Math.random() > 0.5) {
+    var p2 = `random_synth\n`
+    ls.stdin.write(p2)
+    console.log('running ', p2)
+  }
+
+  if (Math.random() > 0.5) {
+    var p2 = `synth_arpeggio\n`
+    ls.stdin.write(p2)
+    console.log('running ', p2)
+  }
+
+  if (Math.random() > 0.9) {
+    var gap = Math.floor(Math.random()*69)
+    var gap2 = Math.floor(Math.random()*69)
+    var gap3 = Math.floor(Math.random()*69)
+    var gap4 = Math.floor(Math.random()*69)
+    ls.stdin.write(`hihat -*${gap} ${generator.generatePattern("complex")}\n`)
+    ls.stdin.write(`hihat2 -*${gap} ${generator.generatePattern("complex")}\n`)
+    ls.stdin.write(`hihat3 -*${gap} ${generator.generatePattern("complex")}\n`)
+    ls.stdin.write(`perc -*${gap} ${generator.generatePattern()}\n`)
+    ls.stdin.write(`perc2 -*${gap} ${generator.generatePattern()}\n`)
+    ls.stdin.write(`misc -*${gap} ${generator.generatePattern()}\n`)
+    console.log('adding random percussion')
+  }
+
+  console.log('running ', p)
+
+  incro++;
+ 
+}, 10000);
+
+
+
 
 rl.on('line', (line) => {
   const cmd = line.trim();
@@ -157,20 +245,9 @@ offset 0, pad 1 -*15, riff 1 -*15, aibass 4 -*15, vocal 6 -*124\n
 var gap2 = Math.floor(Math.random()*69)
 var gap3 = Math.floor(Math.random()*69)
 var gap4 = Math.floor(Math.random()*69)
-
-
      ls.stdin.write(`hihat -*${gap} ${generator.generatePattern("complex")}\n`)
    ls.stdin.write(`hihat2 -*${gap} ${generator.generatePattern("complex")}\n`)
    ls.stdin.write(`hihat3 -*${gap} ${generator.generatePattern("complex")}\n`)
-/*
-  ls.stdin.write(`m1 hihat ${generator.generatePattern()}\n`)
-   ls.stdin.write(`m1 hihat2 ${generator.generatePattern()}\n`)
-   ls.stdin.write(`m1 hihat3 ${generator.generatePattern()}\n`)
-
-  ls.stdin.write(`m2 hihat ${generator.generatePattern()}\n`)
-   ls.stdin.write(`m2 hihat2 ${generator.generatePattern()}\n`)
-   ls.stdin.write(`m2 hihat3 ${generator.generatePattern()}\n`)
-*/
   ls.stdin.write(`perc -*${gap} ${generator.generatePattern()}\n`)
    ls.stdin.write(`perc2 -*${gap} ${generator.generatePattern()}\n`)
    ls.stdin.write(`misc -*${gap} ${generator.generatePattern()}\n`)
@@ -288,7 +365,10 @@ atmos -*${gap2} ${generator.generatePattern()}
   
  }  else if (cmd.startsWith('house')) {
     //var sound = Math.floor(Math.random()*111)
-    ls.stdin.write(`metro 111, kick 4 -*3, openhihat -*2 1 -*1, clap -*4 1 -*3, snare -*2 1 -*13, hihat -*11 [ 9 9 8 4 7 2 4 ], hihat2 -*22 [ 9*5 9 8 4 7 2 4 ], hihat3 0 -*7, perc 0 -*33 1 2 3 4 5 6, perc2 5 -*31 5*11, modular 19 -*15 7 -*15;\n`)
+  //  ls.stdin.write(`metro 111, kick 4 -*3, openhihat -*2 1 -*1, clap -*4 1 -*3, snare -*2 1 -*13, hihat -*11 [ 9 9 8 4 7 2 4 ], hihat2 -*22 [ 9*5 9 8 4 7 2 4 ], 
+
+
+//hihat3 0 -*7, perc 0 -*33 1 2 3 4 5 6, perc2 5 -*31 5*11, modular 19 -*15 7 -*15;\n`)
   } else if (cmd.includes('sp')) {
     ls.stdin.write(cmd.replace(/sp/g, `${generator.generatePattern()}\n`))
   } else if (cmd.includes('cp')) {
